@@ -19,7 +19,7 @@ To test how well a set of freely available environmental and human predictors ca
 | Distance to water | Global Surface Water (occurrence ≥ 90%) | JRC | Distance to permanent water, m |
 | Boundary | GAUL 2015, Level 0 | FAO | National boundary |
 
-![Index](figures/Index_Maps.png)
+![Index_Maps](figures/Index_Maps.png)
 
 ## Method
 All processing was done in Google Earth Engine (`gee/bd_lst_random_forest.js`):
