@@ -19,6 +19,8 @@ To test how well a set of freely available environmental and human predictors ca
 | Distance to water | Global Surface Water (occurrence ≥ 90%) | JRC | Distance to permanent water, m |
 | Boundary | GAUL 2015, Level 0 | FAO | National boundary |
 
+![Index](figures/Index_Maps.png)
+
 ## Method
 All processing was done in Google Earth Engine (`gee/bd_lst_random_forest.js`):
 
@@ -27,7 +29,7 @@ All processing was done in Google Earth Engine (`gee/bd_lst_random_forest.js`):
 3. **Sampling:** 10,000 random pixels were sampled at 1 km (the resolution of the LST data) from populated areas, then randomly split into training (~80%) and testing (~20%) sets with a fixed seed. The test set contains 1,994 points.
 4. **Model:** A Random Forest regression model with 100 trees was trained to predict LST from six predictors: precipitation, elevation, population, NDVI, land cover, and distance to water.
 5. **Evaluation:** Predictions on the test set were compared with observed LST using R², RMSE, and MAE, and plotted against the 1:1 line. Feature importance was taken from the trained model.
-6. **Mapping:** The trained model was applied to all of Bangladesh to produce a predicted LST map and a residual map (predicted − observed).
+6. **Mapping:** The trained model was applied to all of Bangladesh to produce a predicted LST map.
 
 ## Results
 
@@ -73,28 +75,9 @@ All processing was done in Google Earth Engine (`gee/bd_lst_random_forest.js`):
 - **Land cover** contributed least, partly because most sampled pixels fall into just a few classes (croplands and cropland/natural vegetation mosaic make up two-thirds of the test set), and partly because NDVI already captures much of the same information.
 - In the test data, LST was higher where population was denser (r = 0.23) and lower where rainfall was higher (r = −0.25).
 
-<!-- Add the maps once they are exported from ArcGIS Pro:
-| Observed LST | Predicted LST | Residual |
-|---|---|---|
-| ![Observed](figures/lst_observed_map.png) | ![Predicted](figures/lst_predicted_map.png) | ![Residual](figures/lst_residual_map.png) |
--->
-
-## Repository Structure
-```
-├── gee/
-│   └── bd_lst_random_forest.js        Google Earth Engine script
-├── data/
-│   ├── lst_rf_test_predictions.csv    Observed and predicted LST, with predictors, for every test point
-│   └── lst_rf_feature_importance.csv  Feature importance values from the model
-├── figures/
-│   ├── actual_vs_predicted.png        Observed vs predicted LST
-│   └── feature_importance.png         Feature importance chart
-└── README.md
-```
 
 ## How to Reproduce
-1. Open the script in the Earth Engine Code Editor: [Open in GEE](PASTE_GET_LINK_HERE)
-   or paste `gee/bd_lst_random_forest.js` into the [Code Editor](https://code.earthengine.google.com/).
+1. Open the script in the Earth Engine Code Editor: [Open in GEE](https://code.earthengine.google.com/22bba6b1ce24e78cf70f3f2f4a30d555)
 2. Run it. All data comes from the public Earth Engine catalog, so no uploads are needed, and a fixed random seed makes the results repeatable.
 3. The Console shows the sample sizes, test accuracy, the observed vs predicted chart, and feature importance.
 4. Export the tables and rasters from the Tasks tab.
